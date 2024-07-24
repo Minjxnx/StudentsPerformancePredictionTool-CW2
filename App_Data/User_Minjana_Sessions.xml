@@ -5,4 +5,18 @@
     <Hours>5</Hours>
     <Subject>Maths</Subject>
   </Session>
+  <StudySession Id="1">
+    <Date>2024-07-24T19:50:18.8312355+05:30</Date>
+    <Hours>3</Hours>
+    <Subject>Maths</Subject>
+  </StudySession>
+  <StudySession Id="2">
+    <Date>2024-07-24T19:50:32.4150134+05:30</Date>
+    <Hours>2</Hours>
+    <Subject>Science</Subject>
+  </StudySession>
+  <BreakSession Id="1">
+    <Date>2024-07-24T19:50:50.9704601+05:30</Date>
+    <Hours>1</Hours>
+  </BreakSession>
 </Sessions>

@@ -135,8 +135,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BreakSessionModel.cs" />
+    <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\StudySessionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report.asmx.cs">
+      <DependentUpon>Report.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="StudySession.asmx.cs">
       <DependentUpon>StudySession.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -162,6 +167,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Report.asmx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
