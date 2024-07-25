@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Services;
 
@@ -21,14 +22,31 @@ namespace StudentsPerformancePredictionTool_CW2
         [WebMethod]
         public List<ReportModel> GenerateReport(string userName, DateTime startDate, DateTime endDate)
         {
-            // Get study sessions
+            List<StudySessionModel> studySessions = null;
+            List<BreakSessionModel> breakSessions = null;
+
+            // Get the file paths before starting the threads
             var studyService = new StudySession();
-            var studySessions = studyService.GetStudySessions(userName).ToList();
-
-
-            // Get break sessions
             var breakService = new BreakSession();
-            var breakSessions = breakService.GetBreakSessions(userName).ToList();
+
+            var studyFilePath = studyService.GetXmlFilePath(userName);
+            var breakFilePath = breakService.GetXmlFilePath(userName);
+
+            Thread studyThread = new Thread(() =>
+            {
+                studySessions = studyService.GetStudySessionsFromPath(studyFilePath);
+            });
+
+            Thread breakThread = new Thread(() =>
+            {
+                breakSessions = breakService.GetBreakSessionsFromPath(breakFilePath);
+            });
+
+            studyThread.Start();
+            breakThread.Start();
+
+            studyThread.Join();
+            breakThread.Join();
 
 
             // Group and aggregate data by date

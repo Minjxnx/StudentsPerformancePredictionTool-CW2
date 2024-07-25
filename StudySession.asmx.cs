@@ -16,7 +16,7 @@ namespace StudentsPerformancePredictionTool_CW2
     public class StudySession : System.Web.Services.WebService
     {
 
-        private string GetXmlFilePath(String userName)
+        public string GetXmlFilePath(String userName)
         {
             return Server.MapPath($"~/App_Data/User_{userName}_Sessions.xml");
         }
@@ -25,7 +25,11 @@ namespace StudentsPerformancePredictionTool_CW2
         public List<StudySessionModel> GetStudySessions(String userName)
         {
             var filePath = GetXmlFilePath(userName);
+            return GetStudySessionsFromPath(filePath);
+        }
 
+        public List<StudySessionModel> GetStudySessionsFromPath(String filePath)
+        {
             if (File.Exists(filePath))
             {
                 XDocument doc = XDocument.Load(filePath);
@@ -39,7 +43,6 @@ namespace StudentsPerformancePredictionTool_CW2
             }
             return new List<StudySessionModel>();
         }
-
         [WebMethod]
         public StudySessionModel GetStudySessionById(String userName, int sessionId)
         {

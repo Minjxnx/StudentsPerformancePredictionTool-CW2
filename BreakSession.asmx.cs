@@ -19,7 +19,7 @@ namespace StudentsPerformancePredictionTool_CW2
     // [System.Web.Script.Services.ScriptService]
     public class BreakSession : System.Web.Services.WebService
     {
-        private string GetXmlFilePath(String userName)
+        public string GetXmlFilePath(String userName)
         {
             return Server.MapPath($"~/App_Data/User_{userName}_Sessions.xml");
         }
@@ -28,7 +28,11 @@ namespace StudentsPerformancePredictionTool_CW2
         public List<BreakSessionModel> GetBreakSessions(String userName)
         {
             var filePath = GetXmlFilePath(userName);
+            return GetBreakSessionsFromPath(filePath);
+        }
 
+        public List<BreakSessionModel> GetBreakSessionsFromPath(String filePath)
+        {
             if (File.Exists(filePath))
             {
                 XDocument doc = XDocument.Load(filePath);
@@ -36,7 +40,7 @@ namespace StudentsPerformancePredictionTool_CW2
                 {
                     Id = (int)e.Attribute("Id"),
                     Date = DateTime.Parse(e.Element("Date").Value),
-                    Hours = double.Parse(e.Element("Hours").Value),
+                    Hours = double.Parse(e.Element("Hours").Value)
                 }).ToList();
             }
             return new List<BreakSessionModel>();
